@@ -2,8 +2,8 @@ const fs = require('fs');
 const orm = require('orm');
 const yaml = require('js-yaml');
 
-var config = yaml.safeLoad(fs.readFileSync("./config.yaml", 'utf-8'));
-var credential = JSON.parse(fs.readFileSync("./credential.json", 'utf-8'));
+var config = yaml.safeLoad(fs.readFileSync("./config/config.yaml", 'utf-8'));
+var credential = JSON.parse(fs.readFileSync("./config/credential.json", 'utf-8'));
 var app = require("./index.js");
 
 var db_option = {
