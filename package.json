@@ -11,6 +11,8 @@
   "author": "JiminP",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "js-yaml": "^3.6.1",
+    "pug": "^2.0.0-beta3"
   }
 }
