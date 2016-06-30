@@ -11,10 +11,15 @@
   "author": "JiminP",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.13.0",
     "js-yaml": "^3.6.1",
     "mysql": "^2.11.1",
     "orm": "^3.1.0",
+    "passport": "^0.3.2",
     "pug": "^2.0.0-beta3",
     "q": "^1.4.1"
   }
