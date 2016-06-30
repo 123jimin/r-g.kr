@@ -6,7 +6,7 @@ app.get("/", (req, res) => {
 	res.send("Hello, world!");
 });
 
-module.exports = (config) =>  {
+module.exports = (db, config) =>  {
 	app.listen(config.port, () => {
 		console.log(`Listening on port ${config.port}`);
 	});

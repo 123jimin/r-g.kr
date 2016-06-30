@@ -1,1 +1,2 @@
-port: 9003
+# 6400 for dev, 9003 for prod
+port: 6400
