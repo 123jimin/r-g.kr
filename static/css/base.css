@@ -1,7 +1,14 @@
 body {
-	background-color: #F8F8F8;
-	color: #080808;
+	background-color: #F8F8FF;
+	color: #175572;
 
 	font-family: sans-serif;
 	text-align: center;
+
+	overflow: hidden;
+}
+
+h1#hero {
+	font-size: 40vh;
+	margin: 20vh 0;
 }
