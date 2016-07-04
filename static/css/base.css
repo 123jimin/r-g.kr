@@ -9,6 +9,7 @@ body {
 }
 
 h1#hero {
-	font-size: 40vh;
+	font-weight: normal;
+	font-size: 25vmin;
 	margin: 20vh 0;
 }
