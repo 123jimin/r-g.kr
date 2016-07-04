@@ -1,0 +1,13 @@
+# .git*
+
+# credential (secret)
+credential.json
+
+# npm-related files
+npm-debug.log
+node_modules/
+
+# temp, log files
+tmp/
+log/
+
