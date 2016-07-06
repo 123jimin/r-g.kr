@@ -2,8 +2,18 @@ const fs = require('fs');
 const orm = require('orm');
 const yaml = require('js-yaml');
 
-var config = yaml.safeLoad(fs.readFileSync("./config/config.yaml", 'utf-8'));
-var credential = JSON.parse(fs.readFileSync("./config/credential.json", 'utf-8'));
+var config, credential;
+
+config = yaml.safeLoad(fs.readFileSync("./config/config.yaml", 'utf-8'));
+try{
+	credential = fs.readFileSync("./config/credential.yaml" 'utf-8');
+}catch(e){
+	credential = "db:\n    host: localhost\n    user: rg\n    password: \"(change this) r-g.kr\"\n    database: rgDB";
+	fs.writeFileSync("./config/credential.yaml", credential, 'utf-8');
+	console.warn("./config/credential.yaml was created");
+}
+credential = yaml.safeLoad(credential);
+
 var app = require("./index.js");
 
 var db_option = {
