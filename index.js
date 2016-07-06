@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 // app.use(require('cookie-parser'));
 
 app.get("/", (req, res) => {
-	res.render('base');
+	res.render('index');
 });
 
 module.exports = (database, config) =>  {
