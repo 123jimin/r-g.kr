@@ -6,9 +6,15 @@ var config, credential;
 
 config = yaml.safeLoad(fs.readFileSync("./config/config.yaml", 'utf-8'));
 try{
-	credential = fs.readFileSync("./config/credential.yaml" 'utf-8');
+	credential = fs.readFileSync("./config/credential.yaml", 'utf-8');
 }catch(e){
-	credential = "db:\n    host: localhost\n    user: rg\n    password: \"(change this) r-g.kr\"\n    database: rgDB";
+	credential = yaml.safeDump({
+		'db': {
+			'host': "localhost", 'user': "rg",
+			'password': "(change this) r-g.kr",
+			'database': "rgDB"
+		}
+	}, {'indent': 4});
 	fs.writeFileSync("./config/credential.yaml", credential, 'utf-8');
 	console.warn("./config/credential.yaml was created");
 }

@@ -1,7 +1,7 @@
 # .git*
 
 # credential (secret)
-credential.json
+credential.yaml
 
 # npm-related files
 npm-debug.log
