@@ -7,7 +7,7 @@ credential.yaml
 npm-debug.log
 node_modules/
 
-# temp, log files
+# generated files
 tmp/
 log/
-
+public/
