@@ -20,7 +20,8 @@ try{
 }
 credential = yaml.safeLoad(credential);
 
-var app = require("./index.js");
+var RGApp = require("./index.js");
+var app;
 
 var db_option = {
 	'protocol': 'mysql',
@@ -36,6 +37,7 @@ orm.connect(db_option, (err, db) => {
 		console.error(err);
 		return process.exit(1);
 	}
-	app(db, config);
+	app = new RGApp(db, config);
+	app.start();
 });
 
