@@ -31,7 +31,7 @@ orm.connect(db_option, (err, db) => {
 		console.error(err);
 		return process.exit(1);
 	}
-	app = new RGApp(db, config);
+	app = new RGApp(db, config, credential);
 	app.start();
 });
 

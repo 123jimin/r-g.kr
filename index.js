@@ -9,10 +9,11 @@ const sassMiddleware = require('node-sass-middleware');
 
 const expressSession = require('express-session');
 
-function RGApp(db, config){
+function RGApp(db, config, credential){
 	this.app = express();
 	this.db = db;
 	this.config = config;
+	this.credential = credential;
 
 	this.initMiddlewares();
 	this.initRoutes();
@@ -41,7 +42,7 @@ RGApp.prototype.initMiddlewares = function RGApp$initMiddlewares(){
 	app.use(cookieParser());
 
 	// sessions
-	app.use(expressSession({'secret': "(change this) r-g.kr session secret"}));
+	app.use(expressSession({'secret': this.credential.session.secret}));
 };
 
 RGApp.prototype.initRoutes = function RGApp$initRoutes(){
