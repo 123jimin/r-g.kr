@@ -1,13 +1,17 @@
 const express = require('express');
 const path = require('path');
 
+const initModels = require('./models.js');
+
 const compression = require('compression');
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const sassMiddleware = require('node-sass-middleware');
 
 const expressSession = require('express-session');
+
+const passport = require('passport');
+const PassportLocalStrategy = require('passport-local').Strategy;
 
 function RGApp(db, config, credential){
 	this.app = express();
@@ -15,8 +19,25 @@ function RGApp(db, config, credential){
 	this.config = config;
 	this.credential = credential;
 
+	this.models = initModels(this.db);
+
+	this.initPassport();
+
 	this.initMiddlewares();
 	this.initRoutes();
+};
+
+RGApp.prototype.initPassport = function RGApp$initPassport(){
+	passport.use(new PassportLocalStrategy({
+		'usernameField': 'id',
+		'passwordField': 'pw'
+	}, (username, password, done) => {
+		this.models.User.one({'user_name': username}, (err, user) => {
+			if(err) return done(err, false);
+			if(!user) return done(null, false);
+			console.log(err, user);
+		});
+	}));
 };
 
 RGApp.prototype.initMiddlewares = function RGApp$initMiddlewares(){
@@ -43,6 +64,10 @@ RGApp.prototype.initMiddlewares = function RGApp$initMiddlewares(){
 
 	// sessions
 	app.use(expressSession({'secret': this.credential.session.secret}));
+
+	// passport
+	app.use(passport.initialize());
+	app.use(passport.session());
 };
 
 RGApp.prototype.initRoutes = function RGApp$initRoutes(){
@@ -55,11 +80,26 @@ RGApp.prototype.initRoutes = function RGApp$initRoutes(){
 	app.get("/register", (req, res) => {
 		res.render('register');
 	});
+
+	app.get("/login", (req, res) => {
+		res.render('login');
+	});
+
+	app.post("/login", passport.authenticate('local', {
+		'successRedirect': "/",
+		'failureRedirect': "/login"
+	}));
 };
 
 RGApp.prototype.start = function RGApp$start(){
-	this.app.listen(this.config.port, () => {
-		console.log(`Listening on port ${this.config.port}`);
+	this.db.sync((err) => {
+		if(err){
+			console.error(err);
+			return;
+		}
+		this.app.listen(this.config.port, () => {
+			console.log(`Listening on port ${this.config.port}`);
+		});
 	});
 };
 
