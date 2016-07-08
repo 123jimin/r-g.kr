@@ -8,13 +8,7 @@ config = yaml.safeLoad(fs.readFileSync("./config/config.yaml", 'utf-8'));
 try{
 	credential = fs.readFileSync("./config/credential.yaml", 'utf-8');
 }catch(e){
-	credential = yaml.safeDump({
-		'db': {
-			'host': "localhost", 'user': "rg",
-			'password': "(change this) r-g.kr",
-			'database': "rgDB"
-		}
-	}, {'indent': 4});
+    credential = fs.readFileSync("./config/_default_credential.yaml", 'utf-8');
 	fs.writeFileSync("./config/credential.yaml", credential, 'utf-8');
 	console.warn("./config/credential.yaml was created");
 }
