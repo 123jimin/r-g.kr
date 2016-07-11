@@ -1,0 +1,17 @@
+extends ./base.pug
+
+block main
+	h1 로그인
+	form#login(method='POST', action="/login")
+		table
+			tr
+				td
+					label(for='login-id') ID:
+				td
+					input#login-id(name='id', type='text')
+			tr
+				td
+					label(for='login-pw') 비밀번호:
+				td
+					input#login-pw(name='pw', type='password')
+		input#login-submit(type='submit', value='로그인')
