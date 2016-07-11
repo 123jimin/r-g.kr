@@ -83,8 +83,13 @@ RGApp.prototype.initRoutes = function RGApp$initRoutes(){
 		res.render('index');
 	});
 
+	// not REST-like
 	app.get("/register", (req, res) => {
 		res.render('register');
+	});
+
+	app.post("/register", (req, res) => {
+		res.sendStatus(501); // not yet implemented
 	});
 
 	app.get("/login", (req, res) => {
