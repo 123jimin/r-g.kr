@@ -35,9 +35,15 @@ RGApp.prototype.initPassport = function RGApp$initPassport(){
 		this.models.User.one({'user_name': username}, (err, user) => {
 			if(err) return done(err, false);
 			if(!user) return done(null, false);
-			console.log(err, user);
+			user.check(password).then(result => {
+				if(result) return done(null, user);
+				else return done(null, false);
+			});
 		});
 	}));
+	passport.serializeUser((user, done) => done(null, user.id));
+	passport.deserializeUser((id, done) => this.models.User.one({'id': id},
+		(err, user) => done(err, user)));
 };
 
 RGApp.prototype.initMiddlewares = function RGApp$initMiddlewares(){
@@ -87,7 +93,7 @@ RGApp.prototype.initRoutes = function RGApp$initRoutes(){
 
 	app.post("/login", passport.authenticate('local', {
 		'successRedirect': "/",
-		'failureRedirect': "/login"
+		'failureRedirect': "/login?failed=1"
 	}));
 };
 
