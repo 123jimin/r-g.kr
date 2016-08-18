@@ -1,13 +1,13 @@
 # .git*
 
 # credential (secret)
-credential.json
+credential.yaml
 
 # npm-related files
 npm-debug.log
 node_modules/
 
-# temp, log files
+# generated files
 tmp/
 log/
-
+public/

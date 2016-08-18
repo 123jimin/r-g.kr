@@ -1,0 +1,31 @@
+extends ./base.pug
+
+block style
+	link(rel='stylesheet' href="/static/css/register.css")
+
+block main
+	h1 회원 가입
+	p 아직 회원 기능이 완성되지 않았으며, 회원가입은 할 수 없습니다.
+	form#register(method='POST', action="/register")
+		table
+			tr
+				td
+					label(for='register-id') ID:
+				td
+					input#register-id(name='id', type='text')
+			tr
+				td
+					label(for='register-pw') 비밀번호:
+				td
+					input#register-pw(name='pw', type='password')
+			tr
+				td
+					label(for='register-pw-again') 비밀번호 (재입력):
+				td
+					input#register-pw-again(name='pw-again', type='password')
+			tr
+				td
+					label(for='register-email') 이메일 주소:
+				td
+					input#register-email(name='email', type='email')
+		input#register-submit(type='submit', value='가입하기')
