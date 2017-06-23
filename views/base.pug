@@ -1,5 +1,12 @@
 doctype html
 html
-	include partial/head.pug
+	head
+		include partial/head
+		block style
 	body
-		h1#hero r-g.kr
+		div#container
+			div#wrap
+				include partial/nav
+				div#main
+					block main
+		block script

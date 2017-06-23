@@ -1,0 +1,32 @@
+body {
+	background-color: #FAFAFF;
+	color: #175572;
+
+	font-family: sans-serif;
+	text-align: center;
+
+	overflow: hidden;
+}
+
+body#main, table {
+	margin: 0 auto;
+}
+
+nav {
+	>ul {
+		margin: 0;
+		padding: 0;
+		display: block;
+		list-style-type: none;
+		>li {
+			display: inline;
+			margin-left: 1em;
+		}
+	}
+}
+
+h1#hero {
+	font-weight: normal;
+	font-size: 25vmin;
+	margin: 20vh 0;
+}

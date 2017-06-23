@@ -1,3 +1,5 @@
+const Key = require("./lib/key.js");
+
 module.exports = (db) => {
 
 var models = {};
@@ -8,9 +10,16 @@ models.User = db.define('user', {
 	'creation_time': {'type': 'date', 'time': true},
 	'email': {'type': 'text', 'size': 255, 'unique': true},
 	'email_verified': {'type': 'boolean', 'defaultValue': false},
-	'password_hash': {'type': 'binary', 'size': 64},
-	'password_salt': {'type': 'binary', 'size': 64}
+	'password_hash': {'type': 'binary'}
+}, {
+	'methods': {
+		'check': function User$check(password){
+			return Key.check(this.password_hash, password);
+		}
+	}
 });
+
+models.User.hash = Key.hash;
 
 return models;
 
